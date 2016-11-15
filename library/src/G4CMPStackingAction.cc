@@ -69,7 +69,8 @@ G4CMPStackingAction::ClassifyNewTrack(const G4Track* aTrack) {
 
   // Fill kinematic data for new track (secondaries will have this done)
   if (IsPhonon(aTrack)) {
-    auto trackInfo = new G4CMPPhononTrackInfo(theLattice, G4RandomDirection());
+    auto trackInfo = new G4CMPPhononTrackInfo;
+    trackInfo->Init(theLattice, G4RandomDirection());
     G4CMP::AttachTrackInfo(*aTrack, trackInfo);
     SetPhononVelocity(aTrack);
   }
@@ -77,11 +78,13 @@ G4CMPStackingAction::ClassifyNewTrack(const G4Track* aTrack) {
   if (IsChargeCarrier(aTrack)) {
     SetChargeCarrierMass(aTrack);
     if (IsElectron(aTrack)) {
-      auto trackInfo = new G4CMPDriftTrackInfo(theLattice, ChooseValley());
+      auto trackInfo = new G4CMPDriftTrackInfo;
+      trackInfo->Init(theLattice, ChooseValley());
       G4CMP::AttachTrackInfo(*aTrack, trackInfo);
       SetElectronEnergy(aTrack);
     } else { // IsHole
-      auto trackInfo = new G4CMPDriftTrackInfo(theLattice, -1);
+      auto trackInfo = new G4CMPDriftTrackInfo;
+      trackInfo->Init(theLattice, -1);
       G4CMP::AttachTrackInfo(*aTrack, trackInfo);
     }
   }

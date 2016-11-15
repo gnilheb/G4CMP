@@ -22,9 +22,7 @@ class G4LatticePhysical;
 
 class G4CMPVTrackInfo: public G4VAuxiliaryTrackInformation {
 public:
-  G4CMPVTrackInfo() = delete;
-  G4CMPVTrackInfo(const G4LatticePhysical* lat);
-
+  void Init(const G4LatticePhysical* lat)       { lattice = lat; reflCount = 0;}
   size_t ReflectionCount() const                           { return reflCount; }
   void IncrementReflectionCount()                               { ++reflCount; }
 

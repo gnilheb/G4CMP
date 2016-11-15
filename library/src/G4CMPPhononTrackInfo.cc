@@ -15,11 +15,7 @@
 
 #include "G4CMPPhononTrackInfo.hh"
 
-//G4Allocator<G4CMPPhononTrackInfo> G4CMPPhononTrackInfoAllocator;
-
-G4CMPPhononTrackInfo::G4CMPPhononTrackInfo(const G4LatticePhysical* lat,
-                                           G4ThreeVector k) :
-                                           G4CMPVTrackInfo(lat), waveVec(k) {}
+G4Allocator<G4CMPPhononTrackInfo> G4CMPPhononTrackInfoAllocator;
 
 void G4CMPPhononTrackInfo::Print() const {
 //TODO

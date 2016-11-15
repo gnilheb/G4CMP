@@ -17,13 +17,7 @@
 #include "G4LatticePhysical.hh"
 #include "G4ParticleDefinition.hh"
 
-//G4Allocator<G4CMPDriftTrackInfo> G4CMPDriftTrackInfoAllocator;
-
-G4CMPDriftTrackInfo::G4CMPDriftTrackInfo(const G4LatticePhysical* lat,
-                                         G4int valIdx) :
-                                         G4CMPVTrackInfo(lat) {
-  SetValleyIndex(valIdx);
-}
+G4Allocator<G4CMPDriftTrackInfo> G4CMPDriftTrackInfoAllocator;
 
 void G4CMPDriftTrackInfo::SetValleyIndex(G4int valIdx) {
   // -1 is a valid value, so be careful coparing signed/unsigned.

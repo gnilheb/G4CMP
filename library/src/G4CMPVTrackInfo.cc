@@ -15,9 +15,6 @@
 
 #include "G4CMPVTrackInfo.hh"
 
-G4CMPVTrackInfo::G4CMPVTrackInfo(const G4LatticePhysical* lat) :
-  G4VAuxiliaryTrackInformation(), lattice(lat) {}
-
 void G4CMPVTrackInfo::Print() const {
 //TODO
 }

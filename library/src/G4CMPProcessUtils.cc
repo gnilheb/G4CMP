@@ -131,7 +131,8 @@ void G4CMPProcessUtils::LoadDataForTrack(const G4Track* track) {
 
   if (IsPhonon(track)) {
     // NOTE: TrackInfos get cleaned up by G4 when Track gets killed.
-    auto trackInfo = new G4CMPPhononTrackInfo(theLattice, G4RandomDirection());
+    auto trackInfo = new G4CMPPhononTrackInfo;
+    trackInfo->Init(theLattice, G4RandomDirection());
     G4CMP::AttachTrackInfo(*track, trackInfo);
     // Set momentum direction using already provided wavevector
     G4ThreeVector kdir = trackInfo->k();
@@ -144,13 +145,15 @@ void G4CMPProcessUtils::LoadDataForTrack(const G4Track* track) {
 
   if (IsElectron(track)) {
     // NOTE: TrackInfos get cleaned up by G4 when Track gets killed.
-    auto trackInfo = new G4CMPDriftTrackInfo(theLattice, ChooseValley());
+    auto trackInfo = new G4CMPDriftTrackInfo;
+    trackInfo->Init(theLattice, ChooseValley());
     G4CMP::AttachTrackInfo(*track, trackInfo);
   }
 
   if (IsHole(track)) {
     // NOTE: TrackInfos get cleaned up by G4 when Track gets killed.
-    auto trackInfo = new G4CMPDriftTrackInfo(theLattice, -1);
+    auto trackInfo = new G4CMPDriftTrackInfo;
+    trackInfo->Init(theLattice, -1);
     G4CMP::AttachTrackInfo(*track, trackInfo);
   }
 }
@@ -775,7 +778,8 @@ G4Track* G4CMPProcessUtils::CreatePhonon(G4int polarization,
                              currentTrack->GetGlobalTime(), secPos);
 
   // Store wavevector in auxiliary info for track
-  auto trackInfo = new G4CMPPhononTrackInfo(theLattice,
+  auto trackInfo = new G4CMPPhononTrackInfo;
+  trackInfo->Init(theLattice,
                                             G4CMP::GetGlobalDirection(
                                               currentVolume, waveVec));
   G4CMP::AttachTrackInfo(*sec, trackInfo);
@@ -871,7 +875,8 @@ G4CMPProcessUtils::CreateChargeCarrier(G4int charge, G4int valley,
   G4Track* sec = new G4Track(secDP, currentTrack->GetGlobalTime(), secPos);
 
   // Store wavevector in auxiliary info for track
-  auto trackInfo = new G4CMPDriftTrackInfo(theLattice, valley);
+  auto trackInfo = new G4CMPDriftTrackInfo;
+  trackInfo->Init(theLattice, valley);
   G4CMP::AttachTrackInfo(*sec, trackInfo);
 
   return sec;
